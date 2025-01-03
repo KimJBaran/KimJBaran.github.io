@@ -110,6 +110,13 @@
 <span class="line"><span style="color:#F97583">>>></span><span style="color:#E1E4E8"> getsizeof(s)</span></span>
 <span class="line"><span style="color:#79B8FF">68</span></span></code></pre>
 <p>Python returns the correct string length and it also allows random access of characters within the string. I used <code>getsizeof</code> here to figure out which character encoding Python internally uses. It’s UTF-32 (look at the four byte increment when adding a second heart). UTF-32 isn’t Python’s default character encoding though. It appears that Python dynamically changes the encoding depending on the text it needs to represent. Quite some thought went into their string handling, because Python’s documentation also highlights and offers solutions for <a href="https://docs.python.org/3/howto/unicode.html#comparing-strings">comparing Unicode strings</a> — a problem that I’ve said I’d gloss over here. Like Swift, Python is rather well suited to deal with Unicode, but it still requires attention from developers to do The Right Thing.</p>
+<p>Takeaways:</p>
+<ul>
+<li>string length might not count characters in the string</li>
+<li>random access to characters in a string may not work</li>
+<li>string/character comparison needs special handling</li>
+<li>serialization/de-serialization across platforms is difficult</li>
+</ul>
 <p>I hope that this post shines some light on immediate issues that arise when dealing with Unicode. These issues are minor in comparison to the myriad of different individual character encodings that we had to deal with before Unicode, but we can’t quite entirely forget about character encoding just yet.</p>   </div> </article>  </main> <footer class="flex
 	flex-col
 	font-sans
