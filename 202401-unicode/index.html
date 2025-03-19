@@ -27,13 +27,13 @@
         tracking-widest
         z-10
         -mt-[74px]
-        w-[37px]"> <span class="text-[#ff00aa] text-[100px] font-initial">U</span> </h1> <h1 class="text-2xl
+        w-[37px]"> <span class="text-[#ff00aa] text-[100px] font-initial">C</span> </h1> <h1 class="text-2xl
         underline decoration-solid decoration-decoration
         font-sans
         relative
         top-0
         -left-[10px]
-        leading-8"> <span class="text-[#af0075] text-[100px] font-initial">U</span><span class="-ml-[6px]">nicode can make or break you</span> </h1> <p class="text-content-date
+        leading-8"> <span class="text-[#af0075] text-[100px] font-initial">C</span><span class="-ml-[6px]">ommon Unicode encoding pitfalls</span> </h1> <p class="text-content-date
 					w-full
 					mt-[5px]
 					ml-[-10px]
@@ -56,8 +56,8 @@
     prose-h2:text-content-heading
     prose-a:text-[#4c76ab]
     prose-p:text-justify
-    prose-img:rounded-xl">   <p><a href="https://en.wikipedia.org/wiki/Unicode">Unicode</a> is a character encoding standard that’s used everywhere — it maps bytes to letters, numbers, emoji, etc., for us humans to read. I’m sure there are still exceptions where you’ll find other character encodings, but for anything web, mobile, or desktop related you’ll be dealing with Unicode. At a surface level this makes it look like you’ve to never think about character encodings ever again. After all, everything is Unicode now, right? The deceptive simplicity of Unicode makes it easy to internationalize your web-site or app, but there are plenty of edge cases that you’ll need to be aware of or they’ll break you as a developer.</p>
-<p>What’s a character encoding doing though? Character encodings are mapping bytes to characters. <a href="https://en.wikipedia.org/wiki/ASCII">ASCII</a> is a great example for encoding English: it maps 95 printable characters (a-z, A-Z, 0-9, punctuation, etc.) and has mappings for 33 control codes (new line, tab, etc.). That’s 128 encoded mappings which would fit into 7 bits, but you’ll most likely only ever encounter ASCII in 8 bits — one byte per character. Allocating a single byte per character worked fine for English texts back in the day, but that isn’t nearly enough anymore in any international context.</p>
+    prose-img:rounded-xl">   <p><a href="https://en.wikipedia.org/wiki/Unicode">Unicode</a> is a character encoding standard that’s widely used. It maps bytes to letters, numbers, emoji, etc., for us humans to read. I’m sure there are still exceptions where you’ll find other character encodings, but for anything web, mobile, or desktop related you’ll be dealing with Unicode. At a surface level this makes it look like you’ve to never think about character encodings ever again. After all, everything is Unicode now, right? The deceptive simplicity of Unicode makes it easy to internationalize your web-site or app, but there are plenty of edge cases that you’ll need to be aware of.</p>
+<p>What are character encodings? Character encodings map bytes to characters. <a href="https://en.wikipedia.org/wiki/ASCII">ASCII</a> is a great example for encoding English: it maps 95 printable characters (a-z, A-Z, 0-9, punctuation, etc.) and has mappings for 33 control codes (new line, tab, etc.). That’s 128 encoded mappings which would fit into 7 bits, but you’ll most likely only ever encounter ASCII in 8 bits — one byte per character with the most significant bit set to zero. Allocating a single byte per character worked fine for English texts back in the day, but that isn’t nearly enough anymore in any international context.</p>
 <p>Unicode can encode more than 1.1 million characters. Have a look at Unicode <a href="https://en.wikipedia.org/wiki/Plane_%28Unicode%29">Planes</a> and try to figure out how many characters it could theoretically encode, if you feel too jolly today. Since 1.1 million characters can’t be encoded by a single byte, Unicode comes in three major representations:</p>
 <ul>
 <li>UTF-8: uses a single byte for ASCII and up to three bytes for international characters (variable width),</li>
@@ -68,9 +68,9 @@
 <p>Before diving in deeper, I want to point out two things that I won’t address here:</p>
 <ul>
 <li>Unicode’s quirk that allows some character to be represented by different code points (for example, “ê” can be both <code>U+00EA</code> and <code>U+0065 U+0302</code>), and</li>
-<li><a href="https://en.wikipedia.org/wiki/Endianness">endianness</a> that handles whether the most-significant or least-significant byte first is stored first.</li>
+<li><a href="https://en.wikipedia.org/wiki/Endianness">endianness</a> that handles whether the most-significant or least-significant byte is stored first.</li>
 </ul>
-<p>The first issue may cause your app to return empty search results even though the “right” characters were entered by your users, but their internal representation in Unicode doesn’t match. The second issue is a problem when loading/saving data across different operating systems or hardware architectures. Getting endianness wrong will result in entirely wrong characters to be displayed. While these are big problems, there are even simpler Unicode pitfalls to watch out for. Here I’ll look at:</p>
+<p>The first issue may cause your app to return empty search results even though the “right” characters were entered by your users. It just happens that their internal representation in Unicode doesn’t match. The second issue is a problem when loading/saving data across different operating systems or hardware architectures. Getting endianness wrong will result in entirely wrong characters to be displayed. While these are big problems, there are simpler Unicode pitfalls to watch out for. Here I’ll look at:</p>
 <ul>
 <li>string length, and</li>
 <li>random access of individual characters within a string.</li>
@@ -117,7 +117,7 @@
 <li>string/character comparison needs special handling</li>
 <li>serialization/de-serialization across platforms is difficult</li>
 </ul>
-<p>I hope that this post shines some light on immediate issues that arise when dealing with Unicode. These issues are minor in comparison to the myriad of different individual character encodings that we had to deal with before Unicode, but we can’t quite entirely forget about character encoding just yet.</p>   </div> </article>  </main> <footer class="flex
+<p>I hope that this post shines some light on immediate issues that arise when dealing with Unicode. These issues are minor in comparison to the myriad of different individual character encodings that we had to deal with before Unicode, but these are still issues must be addressed.</p>   </div> </article>  </main> <footer class="flex
 	flex-col
 	font-sans
 	text-sm
