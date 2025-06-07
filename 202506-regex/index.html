@@ -1,0 +1,170 @@
+<!DOCTYPE html><html lang="en" class="font-serif
+		leading-6
+		text-content-text
+		bg-gradient-to-r
+		from-background-start
+		via-background-middle
+		to-background-end"> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v5.8.0"><!-- Font preloads --><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Figtree:ital,wght@0,300;1,300&family=Major+Mono+Display&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://kimjbaran.github.io/202506-regex/"><!-- Primary Meta Tags --><title>Kim&#39;s Blog</title><meta name="title" content="Kim's Blog"><meta name="description" content="Blog of Joachim &#34;Kim&#34; Baran"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://kimjbaran.github.io/202506-regex/"><meta property="og:title" content="Kim's Blog"><meta property="og:description" content="Blog of Joachim &#34;Kim&#34; Baran"><meta property="og:image" content="https://kimjbaran.github.io/blog-placeholder-1.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://kimjbaran.github.io/202506-regex/"><meta property="twitter:title" content="Kim's Blog"><meta property="twitter:description" content="Blog of Joachim &#34;Kim&#34; Baran"><meta property="twitter:image" content="https://kimjbaran.github.io/blog-placeholder-1.jpg"><link rel="stylesheet" href="/_astro/_slug_.CqKApjj2.css"></head> <body> <header class="text-base"> <nav class="flex
+		font-sans
+		space-x-8
+		px-8
+		py-2"> <a href="/"> Posts </a> <a href="/about"> About </a> </nav> <div style="min-height: 1px" class="bg-gradient-to-r
+			from-[#d0d0d0]
+			via-[#b0b0b0]
+			to-[#b0b0b0]"></div> </header> <main class="m-8 md:m-16 lg:m-32
+			flex
+			text-content-text
+			justify-center">  <article class="max-w-[500px]"> <div class="my-10"> <h1 class="text-2xl
+        font-sans
+        text-nowrap
+        leading-8
+        relative
+        top-[74px]
+        -left-[10px]
+        overflow-x-clip
+        tracking-widest
+        z-10
+        -mt-[74px]
+        w-[37px]"> <span class="text-[#ff00aa] text-[100px] font-initial">R</span> </h1> <h1 class="text-2xl
+        underline decoration-solid decoration-decoration
+        font-sans
+        relative
+        top-0
+        -left-[10px]
+        leading-8"> <span class="text-[#af0075] text-[100px] font-initial">R</span><span class="-ml-[6px]">egular expressions aren&#39;t hard but they sure look odd</span> </h1> <p class="text-content-date
+					w-full
+					mt-[5px]
+					ml-[-10px]
+					pl-[10px]"> <time datetime="2025-05-23T04:00:00.000Z"> May 23, 2025 </time> </p>  </div> <div class="prose
+    max-w-[500px]
+    text-base
+    leading-6
+    text-content-text
+    prose-a:text-[#444444]
+    prose-code:font-normal
+    prose-h1:font-sans
+    prose-h1:font-normal
+    prose-h1:text-2xl
+    prose-h1:leading-8
+    prose-h1:text-content-heading
+    prose-h2:font-sans
+    prose-h2:font-normal
+    prose-h2:text-xl
+    prose-h2:leading-7
+    prose-h2:text-content-heading
+    prose-a:text-[#4c76ab]
+    prose-p:text-justify
+    prose-img:rounded-xl">   <p>If you’re regularly using <a href="https://en.wikipedia.org/wiki/Regular_expression">regular expressions</a>, then this tangent here isn’t really for you. Judging by the recurring memes about regular expressions, I’m getting the impression that you’re probably still reading this though. Let me tell you then that regular expressions aren’t really that hard to understand, but their syntax surely was inspired by white noise.</p>
+<p>What’s the use of regular expressions (regex, singular) when we’ve programming languages at our disposal? It’s true that you could just code everything that regexes have to offer. In fact, please do, because it pretty much ensures that I’ll always have a job since I’m going to get things done much faster than you. With regexes, I can very quickly:</p>
+<ul>
+<li>match string patterns (input validation, searching, etc.)</li>
+<li>extract sub-strings (splitting input into smaller parts, etc.)</li>
+</ul>
+<p>That’s about it. <a href="https://en.wikipedia.org/wiki/Stephen_Cole_Kleene">Kleene</a> initially came up with the pattern matching idea in 1951, but computer science curriculums are more likely to drone on about regexes as part of the <a href="https://en.wikipedia.org/wiki/Chomsky_hierarchy">Chomsky hierarchy</a> (1956). A lot of time has passed since then and <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions">modern regular expressions</a> are a tad more advanced even though the general concepts have stayed the same. At it’s core, the basics of regexes are simple:</p>
+<ul>
+<li>match a character literal (<code>a</code>, <code>b</code>, <code>c</code> match “a”, “b”, “c”)</li>
+<li>make a logical disjunctive choice (<code>red|white</code>, match “red” or “white”)</li>
+<li>match zero or more times (<code>x\*</code>, matches an empty string, “x”, “xx”, “xxx”, etc.)</li>
+<li>match groups (<code>ca(r|t)</code> matches “car” or “cat”)</li>
+<li>match nothing (no example, because this isn’t relevant to modern regexes anymore)</li>
+</ul>
+<p>Everything else is based on these four building blocks. The syntax is already a bit spicy though. For example, <code>ca(r(e|t)|t)</code> matches “care”, “cart”, and “cat”. Not that easy to see whith the bracketing, isn’t it?</p>
+<p>In the following I’m going to use phone number matching as a real world example. A topic that’s rather controversial among content creators. It really isn’t though. Just matching the <em>format</em> of a phone number is pretty straightforward and it can easily be done with regular expressions. However, matching and validating international phone number <em>ranges</em> is extremely difficult and in need of continous updates. Please use Google’s <a href="https://github.com/google/libphonenumber">libphonenumber</a> for that instead.</p>
+<p>Modern regexes come with additional syntactic sugar, which helps with their readability to a certain degree. Validating phone numbers would be entirely unreadable if you had to spell out a single numerical digit match as <code>0|1|2|3|4|5|6|7|9</code>. That would be a humongous regex to write for a 10 digit phone number. At least 210 characters long. A least! With modern regexes’ character classes, it’s possible to be far more succinct.</p>
+<p>Continuing the phone number example, it’s possible to abbreviate a single digit match as:</p>
+<ul>
+<li>a character class (<code>[0123456789]</code>)</li>
+<li>a character class with character ranges (<code>[0-9]</code>)</li>
+<li>a digital character class escape (<code>\d</code>)</li>
+</ul>
+<p>On top of that, quantifiers instead of the above <code>*</code> (match zero or more) make it possible to be even more succinct. Here are some more phone number inspirations:</p>
+<ul>
+<li>match exactly 10 digits: <code>\d{10}</code></li>
+<li>match at least 10 digits: <code>\d{10,}</code></li>
+<li>match 9 to 11 digits: <code>\d{9,11}</code></li>
+<li>match numbers like 250-555-0199: <code>\d{3}-\d{3}-\d{4}</code></li>
+<li>alternatively match (250) 555-0199: <code>\(\d{3}\) \d{3}-\d{4}</code></li>
+</ul>
+<p>In these examples, regexes are pattern matchers. They tell you whether a string matches them — or not. Well, it’s also possible to extract information out of them with capture groups.</p>
+<p>Let’s say we wanted to get the individual logical parts of a phone number:</p>
+<ul>
+<li><code>\((\d{3})\) (\d{3})-(\d{4})</code>
+<ul>
+<li>captures area code, exchange code, and line number via capture groups that are surrounded by <em>unescaped</em> round brackets</li>
+<li>each group is accessible via index</li>
+</ul>
+</li>
+<li><code>\((?&#x3C;area>\d{3})\) (?&#x3C;co>\d{3})-(?&#x3C;line>\d{4})</code>
+<ul>
+<li>captures area code, exchange code, and line number via named capture groups</li>
+<li>each group is accessible via name instead of position</li>
+<li>useful when some capture groups are optionally appearing in matches</li>
+</ul>
+</li>
+</ul>
+<p>So, these regexes save a lot of coding time, but they do start to resemble white noise for the uninitiated. While I keep them artificially short here to fit the narrow column layout, regexes’ length is something that can be a problem too. Linebreak support and splitting up regexes into smaller parts is unfortunately different across languages. For example, JavaScript doesn’t have an “insignificant whitespace mode” that let’s you break up your regexes over multiple lines, but Rust supports it.</p>
+<p>In JavaScript:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#6A737D">// Split over multiple lines</span></span>
+<span class="line"><span style="color:#6A737D">// to fit smaller screens.</span></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> regEx</span><span style="color:#F97583"> =</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> RegExp</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">  [</span></span>
+<span class="line"><span style="color:#9ECBFF">    /</span><span style="color:#85E89D;font-weight:bold">\(</span><span style="color:#DBEDFF">(?&#x3C;</span><span style="color:#E1E4E8">area</span><span style="color:#DBEDFF">></span><span style="color:#79B8FF">\d</span><span style="color:#F97583">{3}</span><span style="color:#DBEDFF">)</span><span style="color:#85E89D;font-weight:bold">\)</span><span style="color:#9ECBFF">/</span><span style="color:#E1E4E8">.source,</span></span>
+<span class="line"><span style="color:#9ECBFF">    " "</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">    /</span><span style="color:#DBEDFF">(?&#x3C;</span><span style="color:#E1E4E8">co</span><span style="color:#DBEDFF">></span><span style="color:#79B8FF">\d</span><span style="color:#F97583">{3}</span><span style="color:#DBEDFF">)</span><span style="color:#9ECBFF">/</span><span style="color:#E1E4E8">.source,</span></span>
+<span class="line"><span style="color:#9ECBFF">    "-"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">    /</span><span style="color:#DBEDFF">(?&#x3C;</span><span style="color:#E1E4E8">line</span><span style="color:#DBEDFF">></span><span style="color:#79B8FF">\d</span><span style="color:#F97583">{4}</span><span style="color:#DBEDFF">)</span><span style="color:#9ECBFF">/</span><span style="color:#E1E4E8">.source,</span></span>
+<span class="line"><span style="color:#E1E4E8">  ].</span><span style="color:#B392F0">join</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">""</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> pNumber</span><span style="color:#F97583"> =</span><span style="color:#9ECBFF"> "(123) 555-1234"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> capGroups</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> regEx.</span><span style="color:#B392F0">exec</span><span style="color:#E1E4E8">(pNumber);</span></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#FFAB70">  area</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">areaCode</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#FFAB70">  co</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">exchangeCode</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#FFAB70">  line</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">lineNumber</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">} </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> capGroups?.groups </span><span style="color:#F97583">??</span><span style="color:#E1E4E8"> {};</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">console.</span><span style="color:#B392F0">log</span><span style="color:#E1E4E8">(areaCode);</span></span>
+<span class="line"><span style="color:#E1E4E8">console.</span><span style="color:#B392F0">log</span><span style="color:#E1E4E8">(exchangeCode);</span></span>
+<span class="line"><span style="color:#E1E4E8">console.</span><span style="color:#B392F0">log</span><span style="color:#E1E4E8">(lineNumber);</span></span></code></pre>
+<p>In Rust:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="rust"><code><span class="line"><span style="color:#F97583">use</span><span style="color:#B392F0"> regex</span><span style="color:#F97583">::</span><span style="color:#B392F0">Regex</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// (?x) enables insignificant</span></span>
+<span class="line"><span style="color:#6A737D">// whitespace mode. Just to</span></span>
+<span class="line"><span style="color:#6A737D">// fit smaller screens.</span></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> PN</span><span style="color:#F97583">:</span><span style="color:#F97583"> &#x26;</span><span style="color:#B392F0">str</span><span style="color:#F97583"> =</span><span style="color:#9ECBFF"> r"(?x)</span></span>
+<span class="line"><span style="color:#9ECBFF">  \((?&#x3C;area>\d{3})\)\</span></span>
+<span class="line"><span style="color:#9ECBFF">  (?&#x3C;co>\d{3})-(?&#x3C;line>\d{4})"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">fn</span><span style="color:#B392F0"> main</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">    let</span><span style="color:#E1E4E8"> rx </span><span style="color:#F97583">=</span><span style="color:#B392F0"> Regex</span><span style="color:#F97583">::</span><span style="color:#B392F0">new</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">PN</span><span style="color:#E1E4E8">)</span><span style="color:#F97583">.</span><span style="color:#B392F0">unwrap</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    let</span><span style="color:#E1E4E8"> p_num </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "(123) 555-1234"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">    let</span><span style="color:#E1E4E8"> caps </span><span style="color:#F97583">=</span></span>
+<span class="line"><span style="color:#F97583">        match</span><span style="color:#E1E4E8"> rx</span><span style="color:#F97583">.</span><span style="color:#B392F0">captures</span><span style="color:#E1E4E8">(p_num) {</span></span>
+<span class="line"><span style="color:#B392F0">            Some</span><span style="color:#E1E4E8">(caps) </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> caps,</span></span>
+<span class="line"><span style="color:#E1E4E8">            _ </span><span style="color:#F97583">=></span><span style="color:#F97583"> return</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">        };</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    for</span><span style="color:#E1E4E8"> cn </span><span style="color:#F97583">in</span><span style="color:#E1E4E8"> rx</span><span style="color:#F97583">.</span><span style="color:#B392F0">capture_names</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">        let</span><span style="color:#B392F0"> Some</span><span style="color:#E1E4E8">(name) </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> cn </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">            continue</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">        };</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        let</span><span style="color:#E1E4E8"> cap_val </span><span style="color:#F97583">=</span><span style="color:#F97583"> &#x26;</span><span style="color:#E1E4E8">caps[name];</span></span>
+<span class="line"><span style="color:#B392F0">        println!</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"{name}: {cap_val}"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>There’s more to regexes, but what I’ve shown here captures vasts swaths of applications. Go out there an get ‘em tiger!</p>   </div> </article>  </main> <footer class="flex
+	flex-col
+	font-sans
+	text-sm
+	text-footer-links
+	px-4
+	space-y-2
+	mt-20
+	mb-4"> <a class="flex self-end items-center gap-2" href="https://bsky.app/profile/kimjbaran.bsky.social" target="_blank"> <span>Bluesky</span> <svg aria-hidden="true" class="astro-yzt5nm4y astro-lq7oo3uf" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.5rem;"><path d="M12 10.8c-1-2.1-4-6-6.8-8C2.6 1 1.6 1.3.9 1.6.1 1.9 0 3 0 3.8c0 .7.4 5.6.6 6.4C1.4 13 4.3 14 7 13.6h.4H7c-4 .6-7.4 2-2.8 7 5 5.3 6.8-1 7.8-4.2 1 3.2 2 9.3 7.7 4.3 4.3-4.3 1.2-6.5-2.7-7a9 9 0 0 1-.4-.1h.4c2.7.3 5.6-.6 6.4-3.4.2-.8.6-5.7.6-6.4 0-.7-.1-1.9-.9-2.2-.7-.3-1.7-.7-4.3 1.2-2.8 2-5.7 5.9-6.8 8"></path></svg> </a> <a class="flex self-end items-center gap-2" href="https://www.instagram.com/kimjbaran/" target="_blank"> <span>Instagram</span> <svg aria-hidden="true" class="astro-yzt5nm4y astro-lq7oo3uf" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.5rem;"><path d="M17.3 5.5a1.2 1.2 0 1 0 1.2 1.2 1.2 1.2 0 0 0-1.2-1.2ZM22 7.9a7.6 7.6 0 0 0-.4-2.5 5 5 0 0 0-1.2-1.7 4.7 4.7 0 0 0-1.8-1.2 7.3 7.3 0 0 0-2.4-.4L12 2H7.9a7.3 7.3 0 0 0-2.5.5 4.8 4.8 0 0 0-1.7 1.2 4.7 4.7 0 0 0-1.2 1.8 7.3 7.3 0 0 0-.4 2.4L2 12v4.1a7.3 7.3 0 0 0 .5 2.4 4.7 4.7 0 0 0 1.2 1.8 4.8 4.8 0 0 0 1.8 1.2 7.3 7.3 0 0 0 2.4.4l4.1.1h4.1a7.3 7.3 0 0 0 2.4-.5 4.7 4.7 0 0 0 1.8-1.2 4.8 4.8 0 0 0 1.2-1.7 7.6 7.6 0 0 0 .4-2.5L22 12V7.9ZM20.1 16a5.6 5.6 0 0 1-.3 1.9A3 3 0 0 1 19 19a3.2 3.2 0 0 1-1.1.8 5.6 5.6 0 0 1-1.9.3H8a5.7 5.7 0 0 1-1.9-.3A3.3 3.3 0 0 1 5 19a3 3 0 0 1-.7-1.1 5.5 5.5 0 0 1-.4-1.9l-.1-4V8a5.5 5.5 0 0 1 .4-1.9A3 3 0 0 1 5 5a3.1 3.1 0 0 1 1.1-.8A5.7 5.7 0 0 1 8 3.9l4-.1h4a5.6 5.6 0 0 1 1.9.4A3 3 0 0 1 19 5a3 3 0 0 1 .7 1.1A5.6 5.6 0 0 1 20 8l.1 4v4ZM12 6.9a5.1 5.1 0 1 0 5.1 5.1A5.1 5.1 0 0 0 12 6.9Zm0 8.4a3.3 3.3 0 1 1 3.3-3.3 3.3 3.3 0 0 1-3.3 3.3Z"></path></svg> </a> <a class="flex self-end items-center gap-2" href="https://github.com/KimJBaran/" target="_blank"> <span>GitHub</span> <svg aria-hidden="true" class="astro-tfgvj2mv astro-lq7oo3uf" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.08 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3Z"></path></svg> </a> <a class="flex self-end items-center gap-2" href="https://www.linkedin.com/in/joachim-baran-22594745/" target="_blank"> <span>LinkedIn</span> <svg aria-hidden="true" class="astro-yzt5nm4y astro-lq7oo3uf" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.5rem;"><path d="M20.47 2H3.53a1.45 1.45 0 0 0-1.47 1.43v17.14A1.45 1.45 0 0 0 3.53 22h16.94a1.45 1.45 0 0 0 1.47-1.43V3.43A1.45 1.45 0 0 0 20.47 2ZM8.09 18.74h-3v-9h3v9ZM6.59 8.48a1.56 1.56 0 0 1 0-3.12 1.57 1.57 0 1 1 0 3.12Zm12.32 10.26h-3v-4.83c0-1.21-.43-2-1.52-2A1.65 1.65 0 0 0 12.85 13a2 2 0 0 0-.1.73v5h-3v-9h3V11a3 3 0 0 1 2.71-1.5c2 0 3.45 1.29 3.45 4.06v5.18Z"></path></svg> </a> <span class="flex self-end">
+&copy; 2025 Kim J. Baran.
+</span> </footer> </body></html>
