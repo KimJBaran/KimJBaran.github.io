@@ -68,7 +68,7 @@
 <li>match groups (<code>ca(r|t)</code> matches “car” or “cat”)</li>
 <li>match nothing (no example, because this isn’t relevant to modern regexes anymore)</li>
 </ul>
-<p>Everything else is based on these four building blocks. The syntax is already a bit spicy though. For example, <code>ca(r(e|t)|t)</code> matches “care”, “cart”, and “cat”. Not that easy to see whith the bracketing, isn’t it?</p>
+<p>Everything else is based on these four building blocks. The syntax is already a bit spicy though. For example, <code>ca(r(e|t)|t)</code> matches “care”, “cart”, and “cat”. Not that easy to see with the bracketing, isn’t it?</p>
 <p>In the following I’m going to use phone number matching as a real world example. A topic that’s rather controversial among content creators. It really isn’t though. Just matching the <em>format</em> of a phone number is pretty straightforward and it can easily be done with regular expressions. However, matching and validating international phone number <em>ranges</em> is extremely difficult and in need of continous updates. Please use Google’s <a href="https://github.com/google/libphonenumber">libphonenumber</a> for that instead.</p>
 <p>Modern regexes come with additional syntactic sugar, which helps with their readability to a certain degree. Validating phone numbers would be entirely unreadable if you had to spell out a single numerical digit match as <code>0|1|2|3|4|5|6|7|9</code>. That would be a humongous regex to write for a 10 digit phone number. At least 210 characters long. A least! With modern regexes’ character classes, it’s possible to be far more succinct.</p>
 <p>Continuing the phone number example, it’s possible to abbreviate a single digit match as:</p>
